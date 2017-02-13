@@ -1,32 +1,28 @@
 <?php
 session_start();
 require "includes/connection.php";
-$webid=$_GET['webid'];
 
-$query="select * from tb_websites where webid=$webid";
+$webid=$_GET['webid']; // get webid 
+
+$query="select * from tb_websites where webid=$webid"; // search the website via webid in database
 $result=mysql_query($query);
 $row=mysql_fetch_assoc($result);
 
-$weburl =$row['weburl'];
-$location =$row['web_loc'];
-$browser =$row['web_browser'];
-
-//echo $weburl;
-//echo $location;
-//echo $browser;
-		
+$weburl =$row['weburl']; // get the url
+$location =$row['web_loc']; // get the location set by the user eg. Sydney Australia
+$browser =$row['web_browser']; // get the browser set by the user eg. Chrome / Firefox		
 
 require 'vendor/autoload.php';
 use Entrecore\GTMetrixClient\GTMetrixClient;
 use Entrecore\GTMetrixClient\GTMetrixTest;
 
 $client = new GTMetrixClient();
-$client->setUsername('example@gmail.com');
-$client->setAPIKey('API KEY');
+$client->setUsername('example@gmail.com'); // set email/username in gtmetrix REQUIRED
+$client->setAPIKey('API KEY'); // set api key in gtmetrix REQUIRED
 
 $client->getLocations();
 $client->getBrowsers();
-$test = $client->startTest($weburl,$location,$browser);
+$test = $client->startTest($weburl,$location,$browser); // this is where you set the data you get from the database. url , location , browser
 
 //Wait for result
 while ($test->getState() != GTMetrixTest::STATE_COMPLETED &&
@@ -34,6 +30,8 @@ while ($test->getState() != GTMetrixTest::STATE_COMPLETED &&
     $client->getTestStatus($test);
  
 }
+
+// when status is completed get results.
 
 $id=$test->getId();
 $report_url=$test->getReportUrl();
@@ -45,12 +43,14 @@ $page_bytes=$test->getPageBytes();
 $page_load_time=$test->getPageLoadTime();
 
 $resources=$test->getResources();
-$screenshot=$resources["screenshot"];
-$report_pdf=resources["report_pdf"];
+$screenshot=$resources["screenshot"]; // array error here
+$report_pdf=resources["report_pdf"]; // array error here
 
 $_SESSION['urlname']=$weburl;
 
 header("Location: report.php?id=$id & report_url=$report_url & page_score=$page_score & yslow_score=$yslow_score & html_bytes=$html_bytes & html_loadtime=$html_loadtime & page_bytes=$page_bytes & page_load_time=$page_load_time & report_pdf=$report_pdf & weburl=$weburl & screenshot=$screenshot & webid=$webid");
+
+
 
 //echo implode(",",$resources);
 

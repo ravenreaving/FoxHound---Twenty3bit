@@ -2,16 +2,14 @@
 
 require"includes/connection.php";
 
-
+// if user select a website and click analyz button
 if(isset($_POST['analyze']))
 {
 if(isset($_POST['webselect']))
 {
+// get the website id then pass on to gttest.php
 $webid=$_POST['webselect'];
-	
 header("Location:gttest.php?webid=$webid");
-
-
 }
 else
 {
@@ -21,6 +19,7 @@ else
 }
 
 
+// if user added a website
 if(isset($_POST['btn_addwebsite']))
 {
 	if(isset($_POST['weburl']) && isset($_POST['loc_id']) && isset($_POST['browser_id']))
@@ -343,7 +342,7 @@ if(isset($_POST['btn_addwebsite']))
                                             <tbody>             
 
 <?php
-
+// list the websites "LAST REPORTS" not yet finalize in updating when test occur
 			$query="SELECT webid,weburl,rep_webid,rep_testid,rep_pageloadtime,rep_pagespeedscore,rep_yslow,rep_lastreport FROM tb_websites JOIN tb_webreport ON webid=rep_webid";
 			$result=mysql_query($query);
 			while($row=mysql_fetch_assoc($result))
