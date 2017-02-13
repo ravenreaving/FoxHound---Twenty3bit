@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<?php
+
+session_start();
+require "includes/connection.php";
+$id=$_COOKIE['userid'];
+
+if(empty($_COOKIE['userid']) && isset($_COOKIE['userid'])==0)
+{
+	header("Location:login.php");
+}
+if(isset($_POST['btnlogout']))
+{
+	setcookie('userid',0,time()-60*60*24*365);
+	header("Location:login.php");
+}
+
+?>
 <html lang="en">
     <head>        
         <!-- META SECTION -->
@@ -28,7 +45,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="index.html">FoxHound</a>
+                        <a href="index.php">FoxHound</a>
                         <a href="#" class="x-navigation-control"></a>
                     </li>
                  <li class="xn-profile">
@@ -61,8 +78,8 @@
                   <li class="xn-openable">
                         <a href="#"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
                         <ul>
-							<li><a href="#"><span class="fa fa-area-chart"></span>Google Analytics</a></li>
-                           <li><a href="#"><span class="fa fa-line-chart"></span>GTMetrix</a></li>
+							<li><a href="gadash.php"><span class="fa fa-area-chart"></span>Google Analytics</a></li>
+                           <li><a href="gtmetrix.php"><span class="fa fa-line-chart"></span>GTMetrix</a></li>
                         </ul>
                     </li>                  
                    
@@ -106,7 +123,7 @@
 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li><a href="index.html">FoxHound</a></li>                    
+                    <li><a href="index.php">FoxHound</a></li>                    
                     <li class="active">Dashboard</li>
                 </ul>
                 <!-- END BREADCRUMB -->                       
@@ -180,8 +197,9 @@
 								
 								<div class="row">
                                  <div class="panel-footer">
-								 <div class="col-md-6 pull-left">
-                                    <input type="submit" class="btn btn-info" id="btngoogle" name="btngoogle" value="Goto Dashboard">
+								 <div class="col-md-6 pull-right">
+								 <a href="gadash.php" class="btn btn-info">Goto Dashboard</a>
+                                  
 									</div>
 									<label for="btngoogle" class="pull-right">Analytics Dashboard</label>
                                 </div></div>
@@ -207,8 +225,8 @@
 								
 								<div class="row">
                                  <div class="panel-footer">
-								 <div class="col-md-6 pull-left">
-                                    <input type="submit" class="btn btn-info" id="btngtmetrix" name="btngtmetrix" value="Goto Dashboard">
+								 <div class="col-md-6 pull-right">
+                                    <a href="gtmetrix.php" class="btn btn-info">Goto Dashboard</a>
 									</div>
 									<label for="btngetmetrix" class="pull-right">GTMetrix Dashboard</label>
                                 </div></div>
@@ -234,7 +252,8 @@
         <!-- END PAGE CONTAINER -->
 
         <!-- MESSAGE BOX-->
-        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <form action="index.php" method="POST">
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
@@ -244,7 +263,8 @@
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+							<input type="submit" class="btn btn-success btn-lg" name="btnlogout" value="Yes">
+                    
                             <button class="btn btn-default btn-lg mb-control-close">No</button>
                         </div>
                     </div>
@@ -252,7 +272,7 @@
             </div>
         </div>
         <!-- END MESSAGE BOX-->
-
+</form>
 		
 
 	</form>
