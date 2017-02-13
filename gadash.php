@@ -30,10 +30,7 @@ if(isset($_POST['btnlogout']))
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->      
-
-<style>
-
-</style>		
+		
 		
 		  <!-- GA API SCRIPTS --> 
 <script>
@@ -139,12 +136,11 @@ if(isset($_POST['btnlogout']))
                 </ul>
                 <!-- END BREADCRUMB -->                       
                 
-                <!-- PAGE CONTENT WRAPPER -->
+                <!-- PAGE CONTENT CHARTS -->
                 <div class="page-content-wrap">
                     
 					
 					<div class="row">
-					
 					<div class="col-md-6" style="display: none;">
 					<div id="embed-api-auth-container"></div>    
 					</div>
@@ -155,13 +151,11 @@ if(isset($_POST['btnlogout']))
 			
 					
 					<div class="col-md-4 pull-center"> 
-					
                             <div id="view-selector-container"></div>     
                         </div>
 						
 						                     
-                            <!-- END WIDGET REGISTRED -->
-                            
+                          
                         </div>
 					
 				<div class="row">
@@ -172,9 +166,8 @@ if(isset($_POST['btnlogout']))
 					
                                  
                     <div class="row">
-				
-				
-				<!-- Widget GTMETRIX -->
+
+				<!-- Google Analytics Chart Week by sessions -->
 						<div class="col-md-6">
 					<div class="Chartjs">
   <h3>This Week vs Last Week (by sessions)</h3>
@@ -182,9 +175,9 @@ if(isset($_POST['btnlogout']))
   <ol class="Chartjs-legend" id="legend-1-container"></ol>
 </div>
 					</div>
-					<!-- end GTMETRIX -->
-			
-			<!-- Widget GTMETRIX -->
+					<!-- end Google Analytics Chart Week by sessions --> 
+					
+		<!-- Google Analytics Chart Yearly by users -->
 						<div class="col-md-6">
 					<div class="Chartjs">
   <h3>This Year vs Last Year (by users)</h3>
@@ -193,21 +186,23 @@ if(isset($_POST['btnlogout']))
 </div>
 
 					</div>
-					<!-- end GTMETRIX -->
+						<!-- end Google Analytics Chart Yearly by users -->
 
-			
-					
-					
                   </div>
                     
-                   
+                   				
+	
 				   <div class="row"> 
+				   
 				   <div class="col-md-6">
+				   
+				   	<!-- Google Analytics Top Country by sessions -->
 				   <div class="Chartjs">
   <h3>Top Countries (by sessions)</h3>
   <figure class="Chartjs-figure" id="chart-4-container"></figure>
   <ol class="Chartjs-legend" id="legend-4-container"></ol>
 </div>
+   	<!-- end Google Analytics Top Country by sessions -->
 				   </div>
 				   
 				   
